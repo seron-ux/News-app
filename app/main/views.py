@@ -1,6 +1,10 @@
 from flask import render_template,request,redirect,url_for
 from . import main
+from ..requests import get_news,get_news,search_news,get_article
+from .forms import ReviewForm
+from ..models import Review
 
+Review=Review
 
 
 
@@ -12,7 +16,7 @@ def index():
     View root page function that returns the index page and its data
     '''
 
-      # Getting news sources
+    # Getting news sources
     popularity = get_news('popularity')
     bitcoin = get_news('bitcoin')
     business = get_news('business')
@@ -27,7 +31,6 @@ def index():
         return redirect(url_for('search', category_name = search_news))
     else:
         return render_template('index.html', title = title, popularity = popularity, bitcoin = bitcoin, business = business, techcrunch = techcrunch, wall_street = wall_street )
-
 
 
 @main.route('/new/articles/')
@@ -50,5 +53,8 @@ def articles():
         return redirect(url_for('search', category_name = search_news))
     else:
         return render_template('articles.html', title = title, focus = focus, techcrunch = techcrunch, india = india )
+
+
+
 
 
