@@ -1,5 +1,8 @@
-from flask import render_template, request, redirect, url_for
+from flask import render_template,request,redirect,url_for
 from . import main
+
+
+
 
 # Views
 @main.route('/')
@@ -8,17 +11,44 @@ def index():
     '''
     View root page function that returns the index page and its data
     '''
-    sources = get_sources('sources')
-    sports_sources = get_sources('sports')
-    technology_sources = get_sources('technology')
-    entertainment_sources = get_sources('entertainment')
-    title = "Home - News Highlighter"
-    return render_template('index.html', title=title, sources=sources, sports_sources=sports_sources, technology_sources=technology_sources, entertainment_sources=entertainment_sources)
-@main.route('/sources/<id>')
-def articles(id):
+
+      # Getting news sources
+    popularity = get_news('popularity')
+    bitcoin = get_news('bitcoin')
+    business = get_news('business')
+    techcrunch = get_news('techcrunch')
+    wall_street = get_news('wsj')
+
+    title = 'Home - Welcome to The best News Review Website Online'
+
+    search_news = request.args.get('news_query')
+
+    if search_news:
+        return redirect(url_for('search', category_name = search_news))
+    else:
+        return render_template('index.html', title = title, popularity = popularity, bitcoin = bitcoin, business = business, techcrunch = techcrunch, wall_street = wall_street )
+
+
+
+@main.route('/new/articles/')
+def articles():
+
     '''
-    view articles page
+    View root page function that returns the index page and its data
     '''
-    articles = get_articles(id)
-    title = f'NH | {id}'
-    return render_template('articles.html', title=title, articles=articles)
+
+    # Getting news sources
+    focus = get_news('focus')
+    techcrunch = get_news('techcrunch')
+    india = get_news('the-times-of-india')
+
+    title = 'Home - Welcome to The best News Review Website Online'
+
+    search_news = request.args.get('news_query')
+
+    if search_news:
+        return redirect(url_for('search', category_name = search_news))
+    else:
+        return render_template('articles.html', title = title, focus = focus, techcrunch = techcrunch, india = india )
+
+

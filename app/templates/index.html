@@ -1,25 +1,61 @@
 {% extends 'base.html'%}
-{% import 'macros.html' as macro %}
+{% import 'macros.html' as macro%}
+
 <!-- Styles block -->
+
 {% block styles%}
 {{ super() }}
-<link rel="stylesheet" href="{{url_for('static',filename='css/footer.css')}}">
+<link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
 {% endblock %}
+
 <!-- Content block -->
-{% block content%}
-<br><br>
-<div class="container" id="sources">
-  <h3 class="text text-center">Business News Feed</h3>
-  <hr>
-  {{ macro.displaySourceList(sources)}}
-  <h3 class="text text-center">Technology News Feed</h3>
-  <hr>
-  {{ macro.displaySourceList(technology_sources)}}
-  <h3 class="text text-center">Entertainment News Feed</h3>
-  <hr>
-  {{ macro.displaySourceList(entertainment_sources)}}
-  <h3 class="text text-center">Sports News Feed</h3>
-  <hr>
-  {{ macro.displaySourceList(sports_sources)}}
+{% block content %}
+<div class="container">
+    <!-- <form>
+        <input type="text" name="news_query" placeholder="Search for a News" class="form-control">
+        <input type="submit" value="Submit" class="btn btn-default">
+    </form> -->
+
 </div>
-{%endblock%}
+<div class="row">
+    
+        <!-- Popular News -->
+        <h3> Popular News</h3>
+        <ul>
+            {{ macro.displayNewsList(popularity)}}
+        </ul>
+    
+
+    <!-- Upcoming News  -->
+    <h3> Bit Coin News </h3>
+    <ul>
+        {{ macro.displayNewsList(bitcoin)}}
+    </ul>
+
+
+
+
+    <!-- Now showing News -->
+    <h3>Business News</h3>
+    <ul>
+        {{ macro.displayNewsList(business)}}
+    </ul>
+
+    
+
+    <!-- Now showing News -->
+    <h3>Tech Crunch News</h3>
+    <ul>
+        {{ macro.displayNewsList(techcrunch)}}
+    </ul>
+
+<div class="row">
+    <!-- Now showing News -->
+    <h3>Wall Street News</h3>
+    <ul>
+        {{ macro.displayNewsList(wall_street)}}
+    </ul>
+</div>
+
+
+{% endblock%}
