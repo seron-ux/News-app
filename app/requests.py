@@ -38,4 +38,43 @@ def get_news(category):
     return news_results
 
 
+    def search_news(news_name):
+    search_news_url = 'https://api.thenewsdb.org/3/search/news?api_key={}&query={}'.format(api_key,news_name)
+    with urllib.request.urlopen(search_news_url) as url:
+        search_news_data = url.read()
+        search_news_response = json.loads(search_news_data)
+
+        search_news_results = None
+
+        if search_news_response['results']:
+            search_news_list = search_news_response['results']
+            search_news_results = process_results(search_news_list)
+
+
+    return search_news_results
+
+
+    def process_results(news_list):
+    '''
+    Function  that processes the news result and transform them to a list of Objects
+    Args:
+        news_list: A list of dictionaries that contain news details
+    Returns :
+        news_results: A list of news objects
+    '''
+    news_results = []
+    for news_item in news_list:
+        title = news_item.get('title')
+        image = news_item.get('urlToImage')
+        description = news_item.get('description')
+        date = news_item.get('publishedAt')
+        article = news_item.get('url')
+
+        if image:
+            news_object = News(title,image,description,date,article)
+            news_results.append(news_object)
+
+    return news_results
+
+
     
