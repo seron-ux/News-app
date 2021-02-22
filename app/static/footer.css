@@ -1,0 +1,14 @@
+@import "compass/css3";
+
+@import url(https://fonts.googleapis.com/css?family=Raleway);
+
+footer {
+ 
+    @media (max-width: 600px) {
+      width: 100%;
+      @media (max-width: 600px) {
+        text-align: center;
+        padding: 0;
+      }
+    }
+}

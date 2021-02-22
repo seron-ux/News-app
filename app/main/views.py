@@ -2,9 +2,9 @@ from flask import render_template,request,redirect,url_for
 from . import main
 from ..requests import get_news,get_news,search_news,get_article
 from .forms import ReviewForm
-from ..models import Review
+from ..models import News
 
-Review=Review
+# Article=Article
 
 
 
@@ -33,8 +33,8 @@ def index():
         return render_template('index.html', title = title, popularity = popularity, bitcoin = bitcoin, business = business, techcrunch = techcrunch, wall_street = wall_street )
 
 
-@main.route('/new/articles/')
-def articles():
+@main.route('/new/article/')
+def article():
 
     '''
     View root page function that returns the index page and its data
@@ -52,7 +52,7 @@ def articles():
     if search_news:
         return redirect(url_for('search', category_name = search_news))
     else:
-        return render_template('articles.html', title = title, focus = focus, techcrunch = techcrunch, india = india )
+        return render_template('article.html', title = title, focus = focus, techcrunch = techcrunch, india = india )
 
 
 
